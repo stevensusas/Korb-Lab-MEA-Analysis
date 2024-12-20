@@ -202,7 +202,7 @@ ElectrodeBursts <- R6Class(
     #' @param plot_title The title of the plot.
     #' @return A ggpubr object representing the combined raster plots.
     #'
-    create_comparison_raster_plot = function(control_group, treatments_array, plot_title) {
+    create_comparison_raster_plot = function(control_group, treatments_array, plot_title, well.num) {
       create_raster <- function(well, x_lim) {
         plot_data <- self$data %>%
           dplyr::mutate(
@@ -296,7 +296,7 @@ ElectrodeBursts <- R6Class(
         # Combine the two well plots side by side
         combined_plot <- ggpubr::ggarrange(
           plotlist = well_plots,
-          ncol = 2,
+          ncol = well.num,
           nrow = 1,
           common.legend = TRUE,
           legend = "none"
